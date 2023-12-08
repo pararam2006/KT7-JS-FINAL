@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS</title>
+</head>
+<body>
+    <script>
+        //1
+        class Email {
+            constructor(email) {
+  	            this.email = email;
+	        }
+            
+            get isValid() {
+                if(user.email.includes('*') ||
+                user.email.includes('#') || 
+                user.email.includes('$') || 
+                user.email.includes('%') || 
+                user.email.includes('^')) {
+                    console.log('Email is invalid.');
+                } else {
+                    console.log('Email is valid.');
+                }
+            }
+
+            set setEmail(settingEmail) {
+                let emailArr= settingEmail.split(' ');
+                user.email = `${emailArr[0]}@${emailArr[1]}.${emailArr[2]}`;
+            }
+
+            sayEmail() {
+                console.log(this.email);
+            }
+        }
+        
+        let user = new Email('benderkott@gmail.com');
+        user.sayEmail();
+        user.isValid; //valid
+        user.setEmail = 'benderkat* gmiil club'
+        user.sayEmail();
+        user.isValid; // not valid
+
+
+        //2
+        class Contact extends Email {  
+            constructor(email, phone) {
+                super(email);
+                this.phone = phone;
+            }
+            get phoneType() {
+                (contact.phone.startsWith('+') && contact.phone.length == 13)? type = 'Мобильный' :
+                (contact.phone.startsWith('+') && contact.phone.length == 19)? type = 'Городской':
+                type = 'Неизвестный'
+                console.log(`Тип телефона ${contact.phone} - ${type}`);
+            }
+        }
+        
+        let contact = new Contact('benderkott@gmail.com','+123456789012');
+        let type = 'Не определен';
+        console.log(`${contact.email}  ${contact.phone}`);
+        contact.phoneType;
+
+        //3 - доделать
+
+
+        //4 - доделать
+
+    </script>
+</body>
+</html>
