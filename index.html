@@ -62,11 +62,37 @@
         console.log(`${contact.email}  ${contact.phone}`);
         contact.phoneType;
 
-        //3 - доделать
+        //3 
+        let url =  "https://jsonplaceholder.typicode.com/comments"
+        fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          const filteredData = data.filter(item => item.email.length > 20);
+          console.log(filteredData);
+        });
 
+        //4 
+        let usersUrl = "https://jsonplaceholder.typicode.com/users"
+        let commentsUrl =  "https://jsonplaceholder.typicode.com/comments"
 
-        //4 - доделать
+        async function getCommentByUser(nick) {
+          try {
+            const usersResponse = await fetch(usersUrl);
+            const usersData = await usersResponse.json();
 
+            const user = usersData.find(user => user.username === nick);
+
+            const commentsResponse = await fetch(commentsUrl);
+            const commentsData = await commentsResponse.json();
+
+            const userComments = commentsData.filter(comment => comment.email.split('@')[0] === user.email.split('@')[0]);
+
+            console.log(userComments);
+          } catch (error) {
+            console.log('Error:', error);
+          }
+        }
+        getCommentByUser("Samantha");
     </script>
 </body>
 </html>
